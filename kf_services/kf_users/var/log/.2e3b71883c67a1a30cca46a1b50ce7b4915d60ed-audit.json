@@ -1,0 +1,55 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "var/log/.2e3b71883c67a1a30cca46a1b50ce7b4915d60ed-audit.json",
+    "files": [
+        {
+            "date": 1719995065716,
+            "name": "var/log/service-2024-07-03.log",
+            "hash": "fb39c01b9c0d2228d5e35b5695ec60c153ff7ee5662e435d58cde00456ad0dbb"
+        },
+        {
+            "date": 1720070481739,
+            "name": "var/log/service-2024-07-04.log",
+            "hash": "7110e00746999beae4a7da4a0a33272a60b240dfeac2b0792d7467da7fb45639"
+        },
+        {
+            "date": 1720070483174,
+            "name": "var/log/service-2024-07-04.log.1",
+            "hash": "b811e1ca953042a4f2998e2569c5cd0b96bd17ce1e8fa08292c73466ff8d4363"
+        },
+        {
+            "date": 1720070571089,
+            "name": "var/log/service-2024-07-04.log.2",
+            "hash": "c18b335d96a415f8e95f4b33410b3ba3e59fe687c741da542c81d193a40c5efa"
+        },
+        {
+            "date": 1720418135391,
+            "name": "var/log/service-2024-07-08.log",
+            "hash": "1dbfe4f83331684ed13f207e9787e3011b276bc10516878ba97954f9ea8d2fdb"
+        },
+        {
+            "date": 1720418151252,
+            "name": "var/log/service-2024-07-08.log.1",
+            "hash": "cc4aa0d6fb2025a5f23fd76b8c334b28f61c3e137613f6c3dfcf6fff8c607141"
+        },
+        {
+            "date": 1720418176673,
+            "name": "var/log/service-2024-07-08.log.2",
+            "hash": "d126eb2e7398cfa2efbd59a8ff79a8a57941d48d63619faec057e041afd75c35"
+        },
+        {
+            "date": 1720418201390,
+            "name": "var/log/service-2024-07-08.log.3",
+            "hash": "5f6e1326cac71db1a3c80d828561aaccd74a2a86639c4d509ae613cf94bcfcff"
+        },
+        {
+            "date": 1720418212866,
+            "name": "var/log/service-2024-07-08.log.4",
+            "hash": "e4904a7e36d16353be2f53405be170eb6cfd9a42c2577365c141c63d32c35604"
+        }
+    ],
+    "hashType": "sha256"
+}

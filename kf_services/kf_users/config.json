@@ -1,0 +1,29 @@
+{
+    "jwt_secret": "minh",
+    "mariadb_config": {
+        "host": "206.189.82.87", 
+        "port": "3306", 
+        "user": "admin", 
+        "password": "pwd",
+        "conectionLimit": 5,
+        "db": "KDB"
+    },
+    "bcrypt_salt_round": 10,
+    "log": {
+        "dirname": "./var/log"
+    },
+    "JAEGER_URL": "http://localhost:14268",
+    "ELASTIC_SEARCH": "http://localhost:9200/",
+    "REDIS": {
+        "HOST": "206.189.82.87",
+        "PORT": "6379"
+    },
+    "CONSUL": {
+        "HOST": "localhost",
+        "PORT": 8005
+    },
+    "service_name": "kf_users",
+    "service_port": 3000,
+    "health": "/v1/users",
+    "BaseUrl": "http://nginx-nginx-1"
+}
