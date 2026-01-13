@@ -1,0 +1,21 @@
+# version: '3.8'
+
+# services:
+
+#   nginx:
+#     build:
+#       context: ./nginx
+#       dockerfile: dockerfile
+#     # env_file:
+#     #   - .env
+#     ports:
+#       - 80:80
+#     volumes:
+#       # - ./nginx.conf:/etc/nginx/nginx.conf
+#       - /var/run/docker.sock:/var/run/docker.sock
+#     networks:
+#       - kfm_network   
+
+# networks:
+#   kfm_network:
+#     external: true

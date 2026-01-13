@@ -14,7 +14,7 @@ const { FORMAT_HTTP_HEADERS } = require('opentracing');
 const { getNamespace } = require('cls-hooked');
 const { queryWithLogging } = require('../internal/models/cmd-mariadb');
 const cacheProvider = require('../internal/redis/redis-client')
-
+const { userModel } = require('../models')
 class UserController extends BaseController{
     static run(app) {
         app.post('/v1/users/login', validateBody(login), this.handler('login'));
@@ -23,28 +23,10 @@ class UserController extends BaseController{
         app.get('/v1/users', this.handler('getList'));
         app.post('/v1/users/report-late', this.handler('handleReportLate'));
         app.get('/v1/users/lead-boarder', this.handler('getLeadBoarders'));
-        app.get('/v1/users/tracing', this.handler('tracing'));
-
         
     }
 
-    async tracing(req, res, next){
-        try {
-            console.log('test on ')
-            const namespace = getNamespace('request');
-            let headers = {}
-            if (namespace) {
-                const span = namespace.get('span');
-                if (span)
-                    tracer.inject(span.context(), FORMAT_HTTP_HEADERS, headers);
-            }    
-            const data = await axios.get('http://backend-kf_roles-1:3005/v1/roles', { headers })
-            console.log(data.data)
-            return res.json({})
-        } catch (error) {
-            next(error)
-        }
-    }
+
 
     async getLeadBoarders(req, res, next){
         try {
@@ -91,16 +73,17 @@ class UserController extends BaseController{
             logger.info('test get list')
             const namespace = getNamespace('request');
             //await redisClient.set('data', 'minh')
-            const data = await cacheProvider.get('data');
-            logger.info('data from cache: ', data)
-            let headers = {}
-            if (namespace) {
-                const span = namespace.get('span');
-                if (span)
-                    tracer.inject(span.context(), FORMAT_HTTP_HEADERS, headers);
-            }    
+            //const data = await cacheProvider.get('data');
+            //logger.info('data from cache: ', data)
+            // let headers = {}
+            // if (namespace) {
+            //     const span = namespace.get('span');
+            //     if (span)
+            //         tracer.inject(span.context(), FORMAT_HTTP_HEADERS, headers);
+            // }    
             //await axios.get('http://backend-kf_roles-1:3005/v1/roles', { headers })
-            const listUsers = await queryWithLogging({query:`select * from ${KF_USERS}`, params:req.query}) 
+            const listUsers = await userModel.find().lean();
+            //({query:`select * from ${KF_USERS}`, params:req.query}) 
             //conn.query(`select * from ${KF_USERS}`);
             return res.json(listUsers)
         } catch (error) {
@@ -128,8 +111,11 @@ class UserController extends BaseController{
                 if (span)
                     tracer.inject(span.context(), FORMAT_HTTP_HEADERS, headers);
             }    
-            console.log(`${APP_CONFIG.baseUrl}/v1/roles`);
-            await axios.get(`http://kf_stack_nginx/v1/roles`, { headers })
+            logger.info(`${APP_CONFIG.baseUrl}/v1/roles`);
+            
+            const fromRoles = await axios.get(`${APP_CONFIG.baseUrl}/v1/roles`, { headers });
+            logger.info('from role: ', fromRoles.data)
+            logger.info()
             const user = await userService.handleRegister({ body });
             return res.status(201).json(user);
         } catch (error) {

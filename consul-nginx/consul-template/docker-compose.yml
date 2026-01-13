@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  consul-template:
+    image: hashicorp/consul-template
+    command: >
+      -template "/templates/consul-template.tpl:/output/output.json:curl --request PUT --data @/output/output.json http://consul-consul-1:8500/v1/catalog/register"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./templates:/templates
+      - ./output:/output
+    networks:
+      - kfm_network
+
+networks:
+  kfm_network:
+    external: true

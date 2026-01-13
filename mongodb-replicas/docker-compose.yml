@@ -1,0 +1,79 @@
+version: "3.8"
+
+services:
+    mongodb-01:
+        image: mongo
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=123456
+        command: mongod --config /data/mongodb.conf
+        ports:
+            - 30000:27017
+        volumes:
+            - ./data/mongodb01:/data/db
+            - ./config/mongodb.yaml:/data/mongodb.conf
+            - ./config/mongodb.key:/data/mongodb.key
+        deploy:
+            placement:
+                constraints:
+                    - node.hostname == centos-s-2vcpu-4gb-sgp1-01
+    mongodb-02:
+        image: mongo
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=123456
+        command: mongod --config /data/mongodb.conf
+        ports:
+            - 30001:27017
+        volumes:
+            - ./data/mongodb02:/data/db
+            - ./config/mongodb.yaml:/data/mongodb.conf
+            - ./config/mongodb.key:/data/mongodb.key
+        deploy:
+            placement:
+                constraints:
+                    - node.hostname == centos-s-1vcpu-2gb-70gb-intel-sgp1-01
+    mongodb-03:
+        image: mongo
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=123456
+        command: mongod --config /data/mongodb.conf
+        ports:
+            - 30002:27017
+        volumes:
+            - ./data/mongodb03:/data/db
+            - ./config/mongodb.yaml:/data/mongodb.conf
+            - ./config/mongodb.key:/data/mongodb.key
+        deploy:
+            placement:
+                constraints:
+                    - node.hostname == centos-s-1vcpu-2gb-sgp1-01
+    # mongodb-04:
+    #     image: "mongo:4.2.8"
+    #     environment:
+    #         - MONGO_INITDB_ROOT_USERNAME=root
+    #         - MONGO_INITDB_ROOT_PASSWORD=123456
+    #     command: mongod -f /data/mongodb.conf
+    #     ports:
+    #         - 30003:27017
+    #     volumes:
+    #         - ./data/mongodb04:/data/db
+    #         - ./config/mongodb.yaml:/data/mongodb.conf
+    #         - ./config/mongodb.key:/data/mongodb.key
+    # mongodb-05:
+    #     image: "mongo:4.2.8"
+    #     environment:
+    #         - MONGO_INITDB_ROOT_USERNAME=root
+    #         - MONGO_INITDB_ROOT_PASSWORD=123456
+    #     command: mongod -f /data/mongodb.conf
+    #     ports:
+    #         - 30004:27017
+    #     volumes:
+    #         - ./data/mongodb05:/data/db
+    #         - ./config/mongodb.yaml:/data/mongodb.conf
+    #         - ./config/mongodb.key:/data/mongodb.key
+
+networks:
+    kfm_network:
+        external: true

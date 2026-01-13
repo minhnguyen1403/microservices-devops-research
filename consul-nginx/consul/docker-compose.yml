@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  consul:
+    image: hashicorp/consul
+    command: agent -server -ui -node=manager-node -bootstrap-expect=1 -client=0.0.0.0 -advertise=116.111.184.97
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+    networks:
+      - kfm_network
+    volumes:
+      - consul-data:/consul/data
+
+networks:
+  kfm_network:
+    external: true
+
+volumes:
+  consul-data:

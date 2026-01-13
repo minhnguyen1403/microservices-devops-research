@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  collector:
+    image: jaegertracing/jaeger-collector
+    ports:
+      - "14269:14269"
+      - "14268:14268"
+      - "14267:14267"
+      - "9411:9411"
+    networks:
+      - kfm_network
+    restart: on-failure
+    environment:
+      - SPAN_STORAGE_TYPE=elasticsearch
+    command:
+      [
+        "--es.server-urls=http://elasticsearch-elasticsearch-1:9200",
+        "--es.num-shards=1",
+        "--es.num-replicas=0",
+        "--log-level=error",
+        "--collector.zipkin.host-port=9411",
+      ]
+
+  query:
+    image: jaegertracing/jaeger-query
+    environment:
+      - SPAN_STORAGE_TYPE=elasticsearch
+      - no_proxy=localhost
+    ports:
+      - "16686:16686"
+      - "16687:16687"
+    networks:
+      - kfm_network
+    restart: on-failure
+    command:
+      [
+        "--es.server-urls=http://elasticsearch-elasticsearch-1:9200",
+        "--span-storage.type=elasticsearch",
+        "--log-level=debug",
+      ]
+
+networks:
+  kfm_network:
+    external: true

@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+
+  nginx:
+      build:
+        context: ./
+        dockerfile: dockerfile
+      container_name: kf_nginx
+      image: kf_image_nginx
+      ports:
+        - 80:80
+      volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf
+      restart: on-failure
+      networks:
+        - kfm_network   
+
+networks:
+  kfm_network:
+    external: true

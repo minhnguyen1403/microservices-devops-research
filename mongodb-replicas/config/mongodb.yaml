@@ -1,0 +1,15 @@
+storage:
+  dbPath: /data/db
+  wiredTiger:
+    engineConfig:
+        cacheSizeGB: 2
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+processManagement:
+  timeZoneInfo: /usr/share/zoneinfo
+security:
+  authorization: "enabled"
+  keyFile: /data/mongodb.key
+replication:
+  replSetName: "rs0"

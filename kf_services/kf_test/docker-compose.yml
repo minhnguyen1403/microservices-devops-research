@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  kf_tests:
+    image: 210314021403/kf_tests
+    #ports:
+    #- "3001:3000"
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.role_root.rule=Host(`api.minhnguyen.info.vn`) && (PathPrefix(`/v1/test`) || PathPrefix(`/v1/test23`))"
+        - "traefik.http.routers.role_root.entrypoints=web,websecure"
+        - "traefik.http.routers.role_root.service=kf_stack_kf_tests"
+        - "traefik.http.services.kf_stack_kf_tests.loadbalancer.server.port=3000"
+    restart: unless-stopped
+    entrypoint: /home/node/app/start.sh
+    networks:
+      - kfm_network
+
+
+networks:
+  kfm_network:
+    external: true

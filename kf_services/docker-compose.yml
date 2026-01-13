@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  kf_roles:
+    image: 210314021403/kf_roles
+    ports:
+      - "3001:3000"
+    deploy:
+      mode: replicated
+      replicas: 1
+      # labels:
+      #   - "consul.register=true"
+      #   - "consul.service.name=kf_users"
+      #   - "consul.service.port=3000"
+      #   - "consul.tags=backend,service"
+    # env_file:
+    #   - .env
+    # volumes:
+    #   - /Users/minhnguyen/Documents/works/KFM/kfm-devops/kf_services/kf_users:/home/node/app
+    #   - /Users/minhnguyen/Documents/works/KFM/kfm-devops/kf_services/internal:/home/node/app/internal
+    #   - /home/node/app/node_modules
+    restart: unless-stopped
+    entrypoint: /home/node/app/start.sh
+    networks:
+      - kfm_network
+  kf_users:
+    image: 210314021403/kf_users
+    ports:
+      - "3000:3000"
+    deploy:
+      mode: replicated
+      replicas: 1
+      # labels:
+      #   - "consul.register=true"
+      #   - "consul.service.name=kf_users"
+      #   - "consul.service.port=3000"
+      #   - "consul.tags=backend,service"
+    # env_file:
+    #   - .env
+    # volumes:
+    #   - /Users/minhnguyen/Documents/works/KFM/kfm-devops/kf_services/kf_users:/home/node/app
+    #   - /Users/minhnguyen/Documents/works/KFM/kfm-devops/kf_services/internal:/home/node/app/internal
+    #   - /home/node/app/node_modules
+    restart: unless-stopped
+    entrypoint: /home/node/app/start.sh
+    networks:
+      - kfm_network
+
+networks:
+  kfm_network:
+    external: true

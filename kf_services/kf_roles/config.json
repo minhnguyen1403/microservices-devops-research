@@ -1,0 +1,46 @@
+{
+    "jwt_secret": "minh",
+    "mariadb_config": {
+        "host": "157.245.153.7",
+        "port": "3306",
+        "user": "admin",
+        "password": "pwd",
+        "conectionLimit": 5,
+        "db": "KDB"
+    },
+    "bcrypt_salt_round": 10,
+    "log": {
+        "dirname": "./var/log"
+    },
+    "JAEGER_URL": "http://localhost:14268",
+    "ELASTIC_SEARCH": "https://elastic.minhnguyen.info.vn/",
+    "REDIS": {
+        "HOST": "redis.minhnguyen.info.vn",
+        "PORT": "6379"
+    },
+    "CONSUL": {
+        "HOST": "localhost",
+        "PORT": 8005
+    },
+    "MONGODB": {
+        "username": "kf_users",
+        "password": "kf_users",
+        "dbName": "kf_users",
+        "uri": [
+            "mongo.minhnguyen.info.vn:30000",
+            "mongo.minhnguyen.info.vn:30001",
+            "mongo.minhnguyen.info.vn:30002"
+        ],
+        "authSource": "admin",
+        "authMechanism": "SCRAM-SHA-256",
+        "serverSelectionTimeoutMS": 5000,
+        "connectTimeoutMS": 10000,
+        "isDefault": true
+    },
+    "service_name": "kf_roles",
+    "service_port": 3000,
+    "health": "/v1/roles",
+    "BaseUrl": "https://api.minhnguyen.info.vn",
+    "MONGOOSE_QUERY_TIME": 1,
+    "MONGOOSE_DEBUG": true
+}

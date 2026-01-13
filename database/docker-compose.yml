@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+
+  kfm_mariadb:
+    image: mariadb
+    ports:
+      - 3306:3306
+    environment:
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: pwd
+      MARIADB_ROOT_PASSWORD: pwd
+      MARIADB_DATABASE: KDB
+    restart: always
+    volumes:
+      - kfm_db:/var/lib/mysql
+    networks:
+      - kfm_network
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - kfm_network
+
+  
+
+volumes:
+  kfm_db:
+    name: kfm_db
+  redis-data:
+    name: redis-data
+
+networks:
+  kfm_network:
+    external: true

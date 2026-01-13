@@ -1,0 +1,16 @@
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+  mongo:
+    address: ":27017"
+
+providers:
+  swarm:
+    endpoint: "unix:///var/run/docker.sock"
+    useBindPortIP: true
+    network: kfm_network
+api:
+  insecure: true
+  dashboard: true
